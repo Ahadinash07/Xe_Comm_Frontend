@@ -177,10 +177,10 @@ const CategorySection = () => {
       <AnimatePresence>
         {selectedCategory && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.5 }}
+            // initial={{ opacity: 0, y: 50 }}
+            // animate={{ opacity: 1, y: 0 }}
+            // exit={{ opacity: 0, y: 50 }}
+            // transition={{ duration: 0.5 }}
             className="mt-8"
           >
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">Subcategories</h3>
@@ -190,11 +190,11 @@ const CategorySection = () => {
                 .map((subcategory, index) => (
                   <motion.div
                     key={subcategory.subCatId}
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    // initial={{ opacity: 0, x: -50 }}
+                    // animate={{ opacity: 1, x: 0 }}
+                    // transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="bg-gradient-to-br from-purple-700 to-indigo-800 rounded-lg shadow-md p-4 cursor-pointer"
-                    whileHover={{ scale: 1.05, boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}
+                    // whileHover={{ scale: 1.05, boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}
                     onClick={() => handleSubcategoryClick(subcategory.subCatId)}
                   >
                     <span className="text-sm sm:text-lg text-white font-semibold">

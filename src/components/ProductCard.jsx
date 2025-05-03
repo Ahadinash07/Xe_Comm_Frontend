@@ -3,15 +3,26 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FiShoppingCart, FiHeart } from 'react-icons/fi';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product = {} }) => {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Fixed dimensions for all cards
-  const cardWidth = '100%';      // Will expand to fill container
-  const imageHeight = '290px';   // Fixed height for all product images
+  // Set default values for all required product properties
+  const safeProduct = {
+    images: [],
+    productName: 'Untitled Product',
+    price: 0,
+    quantity: 0,
+    productId: '',
+    ...product
+  };
 
-  const imageUrl = product.images?.[0] || null;
+  // Fixed dimensions for all cards
+  const cardWidth = '100%';
+  const imageHeight = '290px';
+
+  // Get first image or fallback to null
+  const imageUrl = safeProduct.images?.[0] || null;
 
   const handleImageError = () => {
     console.error('Failed to load image:', imageUrl);
@@ -22,26 +33,24 @@ const ProductCard = ({ product }) => {
     <motion.div 
       className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col border border-gray-200"
       style={{ width: cardWidth }}
-      // whileHover={{ y: -5 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Link to={`/product/${product.productId}`} className="flex flex-col h-full">
+      <Link to={`/product/${safeProduct.productId}`} className="flex flex-col h-full">
         {/* Image Container with Fixed Height */}
         <div 
           className="relative bg-gray-100 overflow-hidden flex items-center justify-center"
           style={{ 
             height: imageHeight,
-            minHeight: imageHeight // Ensures consistent height even if image fails
+            minHeight: imageHeight
           }}
         >
           {imageUrl && !imageError ? (
             <img
               src={imageUrl}
-              alt={product.productName || 'Product image'}
+              alt={safeProduct.productName}
               className="w-full h-full object-contain p-4"
               style={{
-                // transform: isHovered ? 'scale(1.05)' : 'scale(1)',
                 maxHeight: '100%',
                 maxWidth: '100%'
               }}
@@ -62,30 +71,29 @@ const ProductCard = ({ product }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <button className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100">
+              <button 
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100"
+                onClick={(e) => e.preventDefault()}
+              >
                 <FiHeart className="text-gray-700" />
               </button>
-              <button className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100">
+              <button 
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100"
+                onClick={(e) => e.preventDefault()}
+              >
                 <FiShoppingCart className="text-gray-700" />
               </button>
             </motion.div>
           )}
-
-          {/* Discount Badge */}
-          {/* {product.discount && (
-            <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-              {product.discount}% OFF
-            </span>
-          )} */}
         </div>
 
-        {/* Product Info - Consistent Padding */}
+        {/* Product Info */}
         <div className="p-4 flex-grow flex flex-col">
           <h3 className="text-md font-semibold text-gray-800 mb-1 line-clamp-2">
-            {product.productName || 'Untitled Product'}
+            {safeProduct.productName}
           </h3>
           
-          {/* Rating - Fixed Size */}
+          {/* Rating */}
           <div className="mt-1 mb-2 flex items-center">
             {[1, 2, 3, 4, 5].map((star) => (
               <svg
@@ -100,21 +108,21 @@ const ProductCard = ({ product }) => {
             <span className="ml-1 text-xs text-gray-500">(24)</span>
           </div>
 
-          {/* Price and Stock - Fixed Bottom Alignment */}
+          {/* Price and Stock */}
           <div className="mt-auto">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-lg font-bold text-gray-900">
-                  ₹{product.price?.toFixed(2) || '0.00'}
+                  ₹{safeProduct.price.toFixed(2)}
                 </span>
-                {product.originalPrice && (
+                {safeProduct.originalPrice && (
                   <span className="ml-2 text-sm text-gray-500 line-through">
-                    ₹{product.originalPrice.toFixed(2)}
+                    ₹{safeProduct.originalPrice.toFixed(2)}
                   </span>
                 )}
               </div>
-              <span className={`text-xs ${product.quantity > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {product.quantity > 0 ? 'In Stock' : 'Out of Stock'}
+              <span className={`text-xs ${safeProduct.quantity > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {safeProduct.quantity > 0 ? 'In Stock' : 'Out of Stock'}
               </span>
             </div>
           </div>

@@ -16,6 +16,7 @@ import CartPage from './pages/CartPage';
 import { Toaster } from 'react-hot-toast';
 import OrderPage from './pages/OrderPage';
 import OrdersPage from './pages/OrdersPage';
+import OrderDetailsPage from './pages/OrderDetailsPage';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -42,6 +43,7 @@ function App() {
           <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders/:orderId" element={<OrderDetailsPage />} />
           <Route
             path="/profile/info"
             element={

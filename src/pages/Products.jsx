@@ -53,10 +53,7 @@ const Products = () => {
     fetchProducts();
   }, [filters]);
 
-  const handleFilterChange = (newFilters) => {
-    setFilters((prev) => ({ ...prev, ...newFilters }));
-  };
-
+  
   if (loading) return (
     <motion.div
       initial={{ opacity: 0 }}
