@@ -128,7 +128,7 @@ const ProfileInfoForm = ({ user }) => {
       try {
         const token = localStorage.getItem('token');
         const response = await axios.put(
-          'http://localhost:5376/api/auth/profile',
+          'https://eshopxecommbackend.vercel.app/api/auth/profile',
           formData,
           {
             headers: { Authorization: `Bearer ${token}` },
