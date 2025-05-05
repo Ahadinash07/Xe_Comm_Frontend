@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
-import CategorySection from '../components/CategorySection';
+// import CategorySection from '../components/CategorySection';
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -142,7 +142,7 @@ const Home = () => {
           </div>
         </section>
 
-        <CategorySection />
+       {/* <CategorySection /> */}
       </motion.div>
     </div>
   );
