@@ -456,7 +456,7 @@ const OrdersPage = () => {
                             <div className="mt-6 flex flex-wrap gap-3">
                               <Link
                                 to={`/orders/${order.order_id}`}
-                                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium transition-colors"
+                                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg bg-indigo-600 text-white font-medium transition-colors"
                               >
                                 View Order Details
                               </Link>
