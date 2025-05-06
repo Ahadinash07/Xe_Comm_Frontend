@@ -599,7 +599,7 @@ const OrderDetailsPage = () => {
                     </div>
                     <div>
                       <p className="font-medium capitalize">{order.payment_method.toLowerCase()}</p>
-                      <p className="text-sm text-gray-500">Paid on {formatDate(order.created_at)}</p>
+                      <p className="text-sm text-gray-500">Orderd on {formatDate(order.created_at)}</p>
                     </div>
                   </div>
                   {/* <p className="text-sm text-gray-600">
